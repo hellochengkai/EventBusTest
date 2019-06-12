@@ -89,19 +89,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 /**
                  * 不同的event事件只会发送到event类型相匹配的 Subscribe 回调函数去
                  */
-                new Thread("myThread"){
-                    @Override
-                    public void run() {
-                        super.run();
-                        eventBus.post(new MessageEvent("my massage"));
-                    }
-                }.start();
+//                new Thread("myThread"){
+//                    @Override
+//                    public void run() {
+//                        super.run();
+//                        eventBus.post("fasdfasdfasd");
+//                    }
+//                }.start();
 
+                Log.d(TAG, "onClick: eventBus.post 111");
                 eventBus.post("my string massage time is " + System.currentTimeMillis());
+                Log.d(TAG, "onClick: eventBus.post 222");
                 /**
                  * 发送一个粘性事件
                  */
-                eventBus.postSticky("my string massage time is " + System.currentTimeMillis());
+//                eventBus.postSticky("my string massage time is " + System.currentTimeMillis());
                 break;
             }
             case R.id.button2:{
