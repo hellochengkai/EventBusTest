@@ -19,11 +19,13 @@ public class MySubscribe {
                 " thread is " + Thread.currentThread().getName());
     }
 
-    @Subscribe(threadMode= ThreadMode.POSTING)
+    /**
+     * 接受粘性事件
+     */
+    @Subscribe(sticky =  true,threadMode= ThreadMode.POSTING)
     public void onEventMessage1(String event) throws Throwable {
         Log.d(TAG, "onEventMessage1: " + event +
                 " thread is " + Thread.currentThread().getName());
-
-        throw new Throwable("hahah");
+//        throw new Throwable("hahah");
     }
 }
