@@ -64,7 +64,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 " thread is " + Thread.currentThread().getName());
     }
 
+    /**
+     * 删除黏性事件
+     */
+    public void delStickyEvent()
+    {
+        //1.删除bus上的所有黏性事件
+        eventBus.removeAllStickyEvents();
 
+        //2.删除bus上的某种类型的黏性事件
+        eventBus.removeStickyEvent(String.class);
+
+        //主动获取黏性事件
+        String stickyEvent = eventBus.getStickyEvent(String.class);
+        if(stickyEvent != null){
+            //3.删除bus上指定的某个黏性事件
+            eventBus.removeStickyEvent(stickyEvent);
+        }
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -72,15 +89,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 /**
                  * 不同的event事件只会发送到event类型相匹配的 Subscribe 回调函数去
                  */
-//                new Thread("myThread"){
-//                    @Override
-//                    public void run() {
-//                        super.run();
-//                        eventBus.post(new MessageEvent("my massage"));
-//                    }
-//                }.start();
-//
-//                eventBus.post("my string massage time is " + System.currentTimeMillis());
+                new Thread("myThread"){
+                    @Override
+                    public void run() {
+                        super.run();
+                        eventBus.post(new MessageEvent("my massage"));
+                    }
+                }.start();
+
+                eventBus.post("my string massage time is " + System.currentTimeMillis());
                 /**
                  * 发送一个粘性事件
                  */
